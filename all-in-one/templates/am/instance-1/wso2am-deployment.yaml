@@ -34,6 +34,9 @@ spec:
         product: apim
     spec:
       affinity:
+      {{- if .Values.wso2.deployment.affinity }}
+      {{- toYaml .Values.wso2.deployment.affinity | nindent 8 }}
+      {{- else }}
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -45,6 +48,7 @@ spec:
                   - {{ template "am-all-in-one.fullname" . }}
               topologyKey: "topology.kubernetes.io/zone"
             weight: 100
+      {{- end }}
       {{- if .Values.wso2.apim.secureVaultEnabled }} 
       {{- if .Values.aws.enabled }}
       serviceAccount: {{ .Values.aws.serviceAccountName }}

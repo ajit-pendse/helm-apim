@@ -278,6 +278,9 @@ A Helm chart for the deployment of WSO2 API Manager all-in-one distribution.
 | wso2.deployment.livenessProbe.periodSeconds | int | `10` | How often (in seconds) to perform the probe |
 | wso2.deployment.minAvailable | string | `"50%"` | Minimum available pod counts for PDB |
 | wso2.deployment.nodeSelector | string | `nil` | Node selector to deploy pod in selected node. Add label to the node and specify the label here. |
+| wso2.deployment.affinity | string | `nil` | Affinity to deploy pod in selected set of nodes. For more details, see [documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) |
+| wso2.deployment.tolerations | string | `nil` | Tolerations to allow pods to run on tainted nodes. For more details, see [documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) |
+| wso2.deployment.nodeSelector | string | `nil` | Node selector to deploy pod in selected node. Add label to the node and specify the label here. |
 | wso2.deployment.persistence.solrIndexing | object | `{"capacity":{"carbonDatabase":"50M","solrIndexedData":"50M"},"enabled":false}` | Persistent runtime artifacts for Apache Solr-based indexing |
 | wso2.deployment.persistence.solrIndexing.capacity.carbonDatabase | string | `"50M"` | For persisting the H2 based local Carbon database file |
 | wso2.deployment.persistence.solrIndexing.capacity.solrIndexedData | string | `"50M"` | For persisting the indexed solr data |

@@ -38,6 +38,9 @@ spec:
         product: apim
     spec:
       affinity:
+      {{- if .Values.wso2.deployment.affinity }}
+      {{- toYaml .Values.wso2.deployment.affinity | nindent 8 }}
+      {{- else }}
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
           - podAffinityTerm:
@@ -49,6 +52,7 @@ spec:
                   - {{ template "apim-helm-gw.fullname" . }}
               topologyKey: "topology.kubernetes.io/zone"
             weight: 100
+      {{- end }}
       {{- if .Values.wso2.apim.secureVaultEnabled }} 
       {{- if .Values.aws.enabled }}
       serviceAccount: {{ .Values.aws.serviceAccountName }}
@@ -195,6 +199,10 @@ spec:
       {{- if .Values.wso2.deployment.nodeSelector }}
       nodeSelector:
         {{- toYaml .Values.wso2.deployment.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- if .Values.wso2.deployment.tolerations }}
+      tolerations:
+        {{- toYaml .Values.wso2.deployment.tolerations | nindent 8 }}
       {{- end }}
       volumes:
       - name: wso2am-gateway-conf
