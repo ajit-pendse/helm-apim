@@ -244,6 +244,8 @@ spec:
             secretProviderClass: {{ .Values.gcp.secretsManager.secretProviderClass }}
           {{- end }}
       {{- end }}
+      {{- if .Values.wso2.apim.configurations.security.jksSecretName }}
       - name: wso2am-gateway-keystores
         secret:
           secretName: {{ .Values.wso2.apim.configurations.security.jksSecretName }}
+      {{- end }}
